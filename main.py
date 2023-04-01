@@ -1,6 +1,7 @@
-from website import app
+from app import create_app
+from config import config
 
-app = app()
+app = create_app(config_name=config)
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=8080, debug=True)
