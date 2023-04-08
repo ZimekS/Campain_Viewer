@@ -1,12 +1,23 @@
-FROM python:3
- 
-ENV APP /app/Campain_Viewer
- 
-WORKDIR $APP
- 
-COPY main.py .
-COPY website/ ./website/
-#RUN  python3 -m venv env
-#RUN  env/activate.sh && pip3 install flask 
-RUN pip3 install flask && pip3 install Flask-SQLAlchemy
-CMD ["flask", "--app=main.py", "run", "--host=0.0.0.0", "--port=8080"]
+# pull official base image
+FROM python:3.10.7-slim-buster
+
+# set work directory
+WORKDIR /usr/src/app
+
+# set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+# install system dependencies
+RUN apt-get update && apt-get install -y netcat
+
+# install dependencies
+RUN pip install --upgrade pip
+COPY ./requirements.txt /usr/src/app/requirements.txt
+RUN pip install -r requirements.txt
+
+# copy project
+#COPY main.py .
+COPY . /usr/src/app
+
+ENTRYPOINT ["/usr/src/app/entrypoint.sh"]

@@ -11,14 +11,14 @@ class Config:
     #FLASKY_MAIL_SUBJECT_PREFIX = '[Flasky]'
     #FLASKY_MAIL_SENDER = 'Flasky Admin <flasky@przyklad.pl>'
     #FLASKY_ADMIN = os.environ.get('FLASKY_ADMIN')
-    #SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
     @staticmethod
     def init_app(app):
         pass
     
 class DevelopmentConfig(Config):
     DEBUG = True
-    #SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL')
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL')
     
 class TestingConfig(Config):
     TESTING = True
