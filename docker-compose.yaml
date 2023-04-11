@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     command: python manage.py run -h 0.0.0.0
     volumes:
-      - 'C:\Users\zimek\Documents\GitHub\Campain_Viewer\web:/usr/src/app/'
+      - 'C:\Users\zimek\Documents\GitHub\Campain_Viewer\web:/usr/src/campViewer/'
     env_file:
       - env.dev
     ports:
