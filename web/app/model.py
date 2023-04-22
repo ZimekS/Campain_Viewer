@@ -1,9 +1,7 @@
 from . import db 
-from itsdangerous import URLSafeTimedSerializer as Serializer
 from flask import current_app
 import hashlib
 from flask_login import UserMixin
-
 
 class User(db.Model, UserMixin):
     __tablename__ = "users"
@@ -13,33 +11,17 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(150))
     name = db.Column(db.String(150))
     active = db.Column(db.Boolean(), default=True, nullable=False)
-    role = db.Column(db.String(20), default='User', nullable=False)
     confirmed = db.Column(db.Boolean, default=False)
+    role = db.Column(db.String(12), default='User')
     #avatarHash = db.Column(db.String(32))
     
-    def __init__(self, email, name, password):
+    def __init__(self, email, name, password, role='User'):
         self.email = email
         self.name = name
         self.password = password
-        #if self.email is not None and self.avatarHash is None:
-        #    self.avatarHash = None
-    
-    def generate_confirmation_token(self):
-        s = Serializer(current_app.config['SECRET_KEY'])
-        return s.dumps(self.email, salt=current_app.config['SECRET_KEY'])
-    
-    def confirm_account(self, token, expiration=3600):
-        s = Serializer(current_app.config['SECRET_KEY'])
-        try:
-            email = s.loads(
-                token,
-                salt=current_app.config['SECRET_KEY'],
-                max_age=expiration
-            )
-        except:
-            return False
-        return email
-           
+        self.confirmed = False
+                 
+
 class Systems(db.Model):
     __tablename__ = "systems"
     

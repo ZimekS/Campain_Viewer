@@ -15,7 +15,7 @@ class Config:
     MAIL_PASSWORD = 'lcylsrjgcoxoyzzz'
     #FLASKY_MAIL_SUBJECT_PREFIX = '[Flasky]'
     #FLASKY_MAIL_SENDER = 'Flasky Admin <flasky@przyklad.pl>'
-    #FLASKY_ADMIN = os.environ.get('FLASKY_ADMIN')
+    FLASKY_ADMIN = 'zimekpol@gmail.com'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     @staticmethod
     def init_app(app):

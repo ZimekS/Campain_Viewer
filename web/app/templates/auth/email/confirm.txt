@@ -1,0 +1,7 @@
+Drogi {{new_user.name}},
+Witamy w Campain Viewer!
+Aby potwierdzić swoje konto, kliknij ten link:
+{{ url_for('auth.confirm', token=token, _external=True) }}
+Z poważaniem,
+Zespół Campain Viewer
+Uwaga: Nie odpowiadaj na tę wiadomość.
