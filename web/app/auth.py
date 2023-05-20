@@ -25,7 +25,7 @@ def login():
         else:
             flash('Użytkowanik nie istnieje', category='error')
 
-    return render_template("login.html")
+    return render_template("login.html", user=current_user)
 
 @auth.route('/logout')
 @login_required
@@ -55,7 +55,12 @@ def signUp():
         else:
             if email == current_app.config['FLASKY_ADMIN']:
                 new_user = User(email=email, name=name, password=generate_password_hash(password1, method='sha256'))
+                new_user.confirmed = True
                 new_user.role = 'Admin'
+                db.session.add(new_user)
+                db.session.commit()
+                login_user(new_user, remember=True)
+                return redirect(url_for('views.home'))
             else:
                 new_user = User(email=email, name=name, password=generate_password_hash(password1, method='sha256'))
             db.session.add(new_user)
@@ -68,7 +73,7 @@ def signUp():
             flash('Wysłaliśmy link potwierdzający konto na Twój adres email', category='success')
             return redirect(url_for('views.home'))
             
-    return render_template("signUp.html")
+    return render_template("signUp.html", user=current_user)
 
 @auth.route('/confirm/<token>')
 @login_required
