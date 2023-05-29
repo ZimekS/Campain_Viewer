@@ -15,6 +15,6 @@ def MG_campains():
 def playing_campains():
     return render_template('playing_campains.html', user=current_user)
 
-@views.route('/dodaj_kampanie')
-def add_campains():
-    return render_template('add_campain.html', user=current_user)
+@views.route('/kontakt')
+def contact():
+    return render_template('contact.html', user=current_user)

@@ -27,14 +27,14 @@ def login():
 
     return render_template("login.html", user=current_user)
 
-@auth.route('/logout')
+@auth.route('/wylogowanie')
 @login_required
 def logout():
     logout_user()
     flash('Wylogowano', category='success')
     return redirect(url_for('views.home'))
 
-@auth.route('/sign-up', methods=['GET', 'POST'])
+@auth.route('/rejestracja', methods=['GET', 'POST'])
 def signUp():
     if request.method == 'POST':
         email = request.form.get('email')
@@ -46,7 +46,7 @@ def signUp():
         
         if user:
             flash('Już istnieje taki użytkownik', category='error')
-        elif len(name) < 2:
+        elif len(name) <= 2:
             flash('Twoja nazwa musi mieć conajmniej 3 znaki', category='error')
         elif password1 != password2:
             flash('Hasła się nie zgadzają', category='error')

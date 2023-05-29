@@ -21,74 +21,24 @@ class User(db.Model, UserMixin):
         self.password = password
         self.confirmed = False
                  
-
-class Systems(db.Model):
-    __tablename__ = "systems"
-    
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(200))
         
 class Campain(db.Model):
     __tablename__ = "campains"
     
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120))
-    system = db.Column(db.Integer, db.ForeignKey('systems.id'))
     description = db.Column(db.String(2000))
     session_number = db.Column(db.Integer, default=0, nullable=False)
     game_master = db.Column(db.Integer, db.ForeignKey('users.id'))
     
 
-class PlayersCharacters(db.Model):
-    __tablename__ = "playersCharacters"
+class UsersCampain(db.Model):
+    __tablename__ = "usersCampains"
     
     id = db.Column(db.Integer, primary_key=True)
-    userId = db.Column(db.Integer, db.ForeignKey('users.id'))
-    campainId = db.Column(db.Integer, db.ForeignKey('campains.id'))
-    name = db.Column(db.String(100))
-    system = db.Column(db.Integer, db.ForeignKey('systems.id'))
-    neuroStatsId = db.Column(db.Integer, db.ForeignKey('statsNeuroshima.id'), nullable=True)
-    ddStatsId = db.Column(db.Integer, db.ForeignKey('statsDD.id'), nullable=True)
-    exp = db.Column(db.Integer)
-    
-    #@hybrid_property
-    def stats_id(self):
-        return self.neuroStatsId or self.ddStatsId
-    
-class StatsNeuroshima(db.Model):
-    __tablename__ = "statsNeuroshima"
-    
-    id = db.Column(db.Integer, primary_key=True)
-    agility = db.Column(db.Integer)
-    perception = db.Column(db.Integer)
-    charisma = db.Column(db.Integer)
-    flair = db.Column(db.Integer)
-    build = db.Column(db.Integer)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    campain_id = db.Column(db.Integer, db.ForeignKey('campains.id'))
 
-class StatsDD(db.Model):
-    __tablename__ = "statsDD"
-    
-    id = db.Column(db.Integer, primary_key=True)
-    
-class Equipment(db.Model):
-    __tablename__ = "equipment"
-    
-    id = db.Column(db.Integer, primary_key=True)
-    itemId = db.Column(db.Integer, db.ForeignKey('items.id'))
-    characterId = db.Column(db.Integer, db.ForeignKey('playersCharacters.id'))
-     
-class Items(db.Model):
-    __tablename__ = "items"
-    
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(250))
-    description = db.Column(db.String(2000))
-       
-class Tricks(db.Model):
-    __tablename__ = "tricks"
-    
-    id = db.Column(db.Integer, primary_key=True)
-        
 class NPC(db.Model):
     __tablename__ = "NPC"
     
@@ -99,8 +49,3 @@ class NPC(db.Model):
     description = db.Column(db.String(2000))
     campainId = db.Column(db.Integer, db.ForeignKey('campains.id'))
     avatarHash = db.Column(db.String(32))
-  
-class CharactertsTricks(db.Model):
-    __tablename__ = "charactersTricks"
-    
-    id = db.Column(db.Integer, primary_key=True)

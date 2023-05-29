@@ -27,7 +27,7 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded" aria-label="Eleventh navbar example">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="/">Navbar</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false" 
         aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -38,6 +38,7 @@
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="/">Home</a>
             </li>
+            {% if user.is_authenticated %}
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Kampanie</a>
               <ul class="dropdown-menu">
@@ -45,8 +46,13 @@
                 <li><a class="dropdown-item" href="/grasz">Grasz...</a></li>
               </ul>
             </li>
+            {% else %}
             <li class="nav-item">
-              <a class="nav-link text-white" href="#"><i class="bi bi-envelope-at-fill"></i>Kontakt</a>
+              <a class="nav-link text-white" href="/kontakt">Kampanie</a>
+            </li>
+            {% endif %}
+            <li class="nav-item">
+              <a class="nav-link text-white" href="/kontakt"><i class="bi bi-envelope-at-fill"></i>Kontakt</a>
             </li>
           </ul>
           {% if user.is_authenticated %}
@@ -54,15 +60,15 @@
             <li class="nav-item dropdown ">
               <a class="nav-link dropdown-toggle text-white" href="#" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person-fill"></i>{{user.name}}</a>
               <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="#">MOje konto</a></li>
-                <li><a class="dropdown-item" href="/logout">Wyloguj</a></li>
+                <li><a class="dropdown-item" href="#">Moje konto</a></li>
+                <li><a class="dropdown-item" href="/wyogowanie">Wyloguj</a></li>
               </ul>
             </li>
           </ul>
           {% else %}
           <div class="d-lg-flex col-lg-3 gap-2 justify-content-lg-end">
             <a href="/login" class="btn btn-secondary rounded-pill" role="button">Zaloguj się</a>
-            <a href="/sign-up" class="btn btn-primary rounded-pill" role="button">Rejestracja</a>
+            <a href="/rejestracja" class="btn btn-primary rounded-pill" role="button">Rejestracja</a>
           </div>
           {% endif %}
         </div>
@@ -91,7 +97,7 @@
       {% endif %} 
     {% endwith %}
 
-  <div class="container">{% block container %} {% endblock %}</div>
+  <div class="container-fluid d-flex justify-content-center align-items-center">{% block container %} {% endblock %}</div>
 
   </body>
 </html>
