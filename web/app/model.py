@@ -1,6 +1,5 @@
 from . import db 
 from flask import current_app
-import hashlib
 from flask_login import UserMixin
 
 class User(db.Model, UserMixin):
@@ -28,8 +27,10 @@ class Campain(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120))
     description = db.Column(db.String(2000))
+    img = db.Column(db.String(200))
     session_number = db.Column(db.Integer, default=0, nullable=False)
     game_master = db.Column(db.Integer, db.ForeignKey('users.id'))
+
     
 
 class UsersCampain(db.Model):

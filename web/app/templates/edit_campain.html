@@ -10,7 +10,65 @@
         </div>
       </div>
     </section>
-  
-  
+    {% block content %}
+        <div class="container-fluid">
+          <section class="py-5 text-center container">
+            <div class="row py-lg-5">
+              <form method="POST">
+                <div class="form-floating col-lg-6 col-md-8 mx-auto">
+                  <input type="player" class="form-control" ip="player" name="player" placeholder="Nazwa konta gracza">
+                  <label for="player">Nazwa konta gracza</label>
+                  <br>
+                  <button type="submit" class="btn btn-primary">Dodaj gracza</button>
+                </div>
+              </form>
+            </div>
+          </section>
+          <form method="POST" enctype="multipart/form-data">
+            <div class="mb-5">
+              <label for="name">Nazwa kampanii</label>
+              <input
+              type="name"
+              class="form-control" 
+              ip="name" 
+              name="name" 
+              value="{{ campain.name }}"
+              >
+            </div>
+            <div class="mb-5">
+              <label for="name">Opis kampanii</label>
+              <textarea 
+                class="form-control" 
+                ip="description" 
+                rows="5"
+                name="description">
+                {{ campain.description }}
+              </textarea>
+            </div>
+              <div class="mb-5">
+                <label for="Image" class="form-label">Zdjęcie kampanii</label>
+                <input class="form-control" name="file" type="file" ip="file" onchange="preview()" value="{{ campain.img }}">
+              </div>
+              <img id="frame" src="{{ url_for('static', filename = campain.img) }}" class="rounded mx-auto d-block" />
+            </div>
+
+            <script>
+                function preview() {
+                    frame.src = URL.createObjectURL(event.target.files[0]);
+                }
+                function clearImage() {
+                    document.getElementById('file').value = null;
+                    frame.src = "";
+                }
+            </script>
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary text" >
+              Aktualizuj kampanię
+              </button>
+            </div>
+          </form>
+        </div>    
+    {% endblock %}
+    
   </main>
 {% endblock %}

@@ -17,3 +17,25 @@ def test_home_page():
         response = test_client.get('/')
         assert response.status_code == 200
         assert b"This is home" in response.data
+        
+def test_MG_campains_page():
+
+    os.environ['FLASK_CONFIG'] = 'testing'
+    flask_app = create_app(os.getenv('FLASK_CONFIG') or 'default')
+
+    
+    with flask_app.test_client() as test_client:
+        response = test_client.get('/prowadzisz')
+        assert response.status_code == 200
+        assert b"Na tej stronie zobaczysz wszystkie kampanie" in response.data
+
+def test_player_campains_page():
+
+    os.environ['FLASK_CONFIG'] = 'testing'
+    flask_app = create_app(os.getenv('FLASK_CONFIG') or 'default')
+
+    
+    with flask_app.test_client() as test_client:
+        response = test_client.get('/grasz')
+        assert response.status_code == 200
+        assert b"Grasz w ..." in response.data

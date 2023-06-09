@@ -17,6 +17,7 @@ class Config:
     #FLASKY_MAIL_SENDER = 'Flasky Admin <flasky@przyklad.pl>'
     FLASKY_ADMIN = 'zimekpol@gmail.com'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    UPLOAD_FOLDER  = "/usr/src/campViewer/app/static"
     @staticmethod
     def init_app(app):
         pass

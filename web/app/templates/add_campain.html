@@ -12,7 +12,7 @@
     </section>
   
     <div class="container-fluid">
-      <form method="POST">
+      <form method="POST" enctype="multipart/form-data">
         <div class="mb-5">
           <label for="name">Nazwa kampanii</label>
           <input
@@ -29,12 +29,12 @@
             class="form-control" 
             ip="description" 
             rows="5"
-            name="descritpion">
+            name="description">
           </textarea>
         </div>
           <div class="mb-5">
             <label for="Image" class="form-label">Zdjęcie kampanii</label>
-            <input class="form-control" name="img" type="file" ip="file" onchange="preview()">
+            <input class="form-control" name="file" type="file" ip="file" onchange="preview()">
           </div>
           <img id="frame" src="" class="rounded mx-auto d-block" />
         </div>
