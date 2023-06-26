@@ -43,9 +43,11 @@ def signUp():
         password2 = request.form.get('password2')
 
         user = User.query.filter_by(email=email).first()
-        
+        user_name = User.query.filter_by(name=name).first()
         if user:
             flash('Już istnieje taki użytkownik', category='error')
+        elif user_name:
+            flash('Podana nazwa jest już zajęta, wybierz inną', category='error')
         elif len(name) <= 2:
             flash('Twoja nazwa musi mieć conajmniej 3 znaki', category='error')
         elif password1 != password2:

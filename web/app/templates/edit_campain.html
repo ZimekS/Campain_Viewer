@@ -49,7 +49,7 @@
                 <label for="Image" class="form-label">Zdjęcie kampanii</label>
                 <input class="form-control" name="file" type="file" ip="file" onchange="preview()" value="{{ campain.img }}">
               </div>
-              <img id="frame" src="{{ url_for('static', filename = campain.img) }}" class="rounded mx-auto d-block" />
+              <img id="frame" src="{{ url_for('static', filename = 'images/'+campain.img) }}" class="rounded mx-auto d-block" />
             </div>
 
             <script>

@@ -6,7 +6,7 @@ import os
 from werkzeug.utils import secure_filename
 
 campains = Blueprint('campains', __name__)
-UPLOAD_FOLDER  = "/usr/src/campViewer/app/static"
+UPLOAD_FOLDER  = "/usr/src/campViewer/app/static/images"
 #ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 @campains.route('/dodaj_kampanie', methods=['GET', 'POST'])
@@ -54,7 +54,6 @@ def edit_campain(id):
             setattr(campain, 'img', path_to_file)
             db.session.commit()
             flash('Zaaktualizowano kampanię', category='success')
-            redirect_path = 'views.kampania.' + str(id)
             return render_template('edit_campain.html', campain=campain, user=current_user)
     
     return render_template('edit_campain.html', user=current_user)

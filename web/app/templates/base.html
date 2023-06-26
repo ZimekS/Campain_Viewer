@@ -27,7 +27,9 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded" aria-label="Eleventh navbar example">
       <div class="container-fluid">
-        <a class="navbar-brand" href="/">Navbar</a>
+        <a class="navbar-brand" href="/">
+          <img src="static/logo.png" style="width:40px;" class="rounded-pill"> 
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false" 
         aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -51,9 +53,6 @@
               <a class="nav-link text-white" href="/kontakt">Kampanie</a>
             </li>
             {% endif %}
-            <li class="nav-item">
-              <a class="nav-link text-white" href="/kontakt"><i class="bi bi-envelope-at-fill"></i>Kontakt</a>
-            </li>
           </ul>
           {% if user.is_authenticated %}
           <ul class="navbar-nav d-flex flex-row me-1">

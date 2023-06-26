@@ -24,7 +24,7 @@ def playing_campains():
 @views.route('/kampania/<id>')
 def campain(id):
     data = db.session.query(Campain).filter(Campain.id == id).one()
-    return render_template('campain.html', user=current_user, campain=data )
+    return render_template('campain.html', user=current_user, campain=data, image=data.img )
 
 @views.route('/kontakt')
 def contact():
